@@ -1,23 +1,6 @@
-/**
- * Created by igorkirichenko on 7/24/16.
- */
-
-var div_ids = [];
-
-console.log('FAZI SCRIPT');
-console.log(document);
-div_ids.forEach(function (x) {
-  var el = document.getElementById(x);
-  console.log('checkin ' + x + ' : ' + el);
-  if (el)
-  {
-    console.log('removed ' + x);
-    el.remove();
-  }
-});
-
 (function () {
-  "use strict";
+  console.log('BLEACH SCRIPT');
+  var div_ids = [];
 
   var MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
 
@@ -166,11 +149,15 @@ div_ids.forEach(function (x) {
           });
 
           Array.prototype.forEach.call(record.addedNodes, function (node) {
-            highlightNode(node, {r: 138, g: 219, b: 246});
-
-            findShadowRoots(node).forEach(function (shadowRoot) {
-              observer.observe(shadowRoot, observerSettings);
+            div_ids.forEach(function (x) {
+              if (node.id == x)
+              {
+                console.log('removed ' + x);
+                node.remove();
+              }
             });
+//            highlightNode(node, {r: 138, g: 219, b: 246});
+
           });
         }
 
@@ -247,5 +234,6 @@ div_ids.forEach(function (x) {
         return nodeRegistry[nodeId];
       }
     };
+    window.domListenerExtension.startListening();
   }
 })();

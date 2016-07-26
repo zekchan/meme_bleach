@@ -3,11 +3,12 @@
   "manifest_version": 2,
   "version": "1.0",
   "description": "The very first chrome extension I've ever written!",
-  "permissions": [
-    "tabs",
-    "<all_urls>"
-  ],
-  "background": {
-    "scripts": ["js/background.js"]
-  },
+  "content_scripts":
+  [
+    {
+      "matches": ["*://*/*"],
+      "js": ["src/content.js"],
+      "run_at": "document_end"
+    }
+  ]
 }
