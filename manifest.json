@@ -1,14 +1,12 @@
 {
-  "name": "NORMIES FILTER: GET DA FUK OF MY BOARD!@!#$$!@$$$@!!",
+  "name": "MEME BLEACH",
   "manifest_version": 2,
-  "version": "1.0",
-  "description": "The very first chrome extension I've ever written!",
+  "version": "0.1",
   "content_scripts":
   [
     {
-      "matches": ["*://*/*"],
-      "js": ["src/content.js"],
-      "run_at": "document_end"
+      "matches": ["http://*/*", "https://*/*"],
+      "js": ["src/content.js"]
     }
   ]
 }
