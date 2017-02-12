@@ -1,62 +1,24 @@
-//var div_ids = ['profile_friends', 'profile_friends_online', 'l_fr', 'wd-wrapper-_topnews', 'l_msg'];
+// CONFIG TODO: перенести в отдельную страницу и хранить в chromeStorage
 
+const usersBlackList = [
+  '22904165' // Гарданов
+];
+const anotherSelectors = [
+  '.nim-dialog_muted .nim-dialog--text-preview', // превью замьюченных чатов
+  '.nim-dialog_muted ._im_dialog_unread_ct' // счетчик непрочитанных сообщений у замьюченных чатов
+];
 
-function update_dom() {
-  const gardanovs = document.querySelectorAll('[data-peer="22904165"]');
-  if (gardanovs) {
-    gardanovs.forEach(function(el) {
-      el.remove();
-    });
-  }
-  const previews = [].slice.call(document.getElementsByClassName('nim-dialog--text-preview'));
-  if (previews) {
-    previews.forEach(function(el) {
-      el.remove();
-    });
-  }
-  /*  div_ids.forEach(function( x ) {
-   var el = document.getElementById(x);
-   //    console.log('checkin ' + x + ' : ' + el);
-   if (el) {
-   console.log('removed ' + x);
-   el.remove();
-   }
-   });*/
+const makeUserSelector = id => `[data-peer="${id}"]`;
+const selectors = [
+  ...usersBlackList.map(makeUserSelector),
+  ...anotherSelectors
+].join(',');
+
+const styleSheet = `${selectors}{display: none !important;}`;
+function addStyleSheet() {
+  const style = document.createElement('style');
+  style.innerHTML = styleSheet;
+  document.head.appendChild(style);
 }
 
-try {
-  update_dom();
-}
-catch (ex) {
-
-}
-
-function try_observe() {
-  try {
-    var MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
-    var list             = document.querySelector('body');
-
-    var observer = new MutationObserver(function(mutations) {
-      mutations.forEach(function(mutation) {
-//    console.log(mutation);
-        if (mutation.addedNodes && mutation.addedNodes.length > 0) {
-//      console.log(mutation);
-          update_dom();
-        }
-      });
-    });
-
-    observer.observe(document.body, {
-      childList :     true,
-      subtree :       true,
-      attributes :    true,
-      characterData : true
-    });
-  }
-  catch (ex) {
-    console.error(ex);
-    update_dom();
-    setTimeout(try_observe, 100);
-  }
-}
-try_observe();
+document.addEventListener('DOMContentLoaded', addStyleSheet, false);
