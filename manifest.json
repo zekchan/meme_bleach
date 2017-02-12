@@ -5,7 +5,7 @@
   "content_scripts":
   [
     {
-      "matches": ["http://*/*", "https://*/*"],
+      "matches": ["http://vk.com/*", "https://vk.com/*"],
       "js": ["src/content.js"],
       "run_at":    "document_start"
     }
