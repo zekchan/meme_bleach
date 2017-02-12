@@ -4,8 +4,9 @@ const usersBlackList = [
   '22904165' // Гарданов
 ];
 const anotherSelectors = [
-  '.nim-dialog_muted .nim-dialog--text-preview', // превью замьюченных чатов
-  '.nim-dialog_muted ._im_dialog_unread_ct' // счетчик непрочитанных сообщений у замьюченных чатов
+  // '.nim-dialog_muted .nim-dialog--text-preview', // превью замьюченных чатов
+  // '.nim-dialog_muted ._im_dialog_unread_ct', // счетчик непрочитанных сообщений у замьюченных чатов
+  // '._im_typer_c' // уведомление о тайпингах
 ];
 
 const makeUserSelector = id => `[data-peer="${id}"]`;
